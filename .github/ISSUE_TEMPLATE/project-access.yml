@@ -1,0 +1,24 @@
+name: Paid project access
+description: Request information about the paid personal-use project package.
+title: "[Access] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This request is public. Do not include payment details, addresses or private information.
+        Project files and assembly manuals require paid access. A request does not activate access.
+        DETENT D23 is a development prototype without a validated load rating.
+  - type: input
+    id: public_name
+    attributes:
+      label: Public maker name
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Intended personal use
+      description: Describe the laptop and printer in general terms. No private information.
+    validations:
+      required: true

@@ -1,0 +1,32 @@
+name: Commercial print license
+description: Request the US$29/year DETENT commercial print license
+title: "[Commercial license] Request"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public request, not checkout or license activation.
+        Do not include payment, billing, private contact or personal information.
+        D23 is a prototype without a validated load rating.
+        Read [the offer](https://github.com/wesguirra/detent/blob/main/COMMERCIAL-LICENSE.md).
+  - type: input
+    id: maker
+    attributes:
+      label: Public maker or shop name
+      description: Only a name you are comfortable publishing.
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Intended use
+      description: Briefly describe the physical products you plan to offer.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledge
+    attributes:
+      label: Acknowledgment
+      options:
+        - label: I understand that this request does not activate a commercial license and that D23 requires physical validation before product sales.
+          required: true
