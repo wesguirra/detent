@@ -1,5 +1,5 @@
 name: Paid project access
-description: Request information about the paid personal-use project package.
+description: Ask about the US$19 personal-use digital project package.
 title: "[Access] "
 labels: []
 body:
@@ -7,8 +7,8 @@ body:
     attributes:
       value: |
         This request is public. Do not include payment details, addresses or private information.
-        Project files and assembly manuals require paid access. A request does not activate access.
-        DETENT D23 is a development prototype without a validated load rating.
+        Personal-use access costs US$19 as a one-time purchase. This form is not checkout or delivery; a request does not activate access.
+        DETENT D25 is a development prototype without a validated load rating.
   - type: input
     id: public_name
     attributes:

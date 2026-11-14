@@ -7,7 +7,7 @@ body:
       value: |
         This is a public request, not checkout or license activation.
         Do not include payment, billing, private contact or personal information.
-        D23 is a prototype without a validated load rating.
+        D25 is a prototype without a validated load rating.
         Read [the offer](https://github.com/wesguirra/detent/blob/main/COMMERCIAL-LICENSE.md).
   - type: input
     id: maker
@@ -28,5 +28,5 @@ body:
     attributes:
       label: Acknowledgment
       options:
-        - label: I understand that this request does not activate a commercial license and that D23 requires physical validation before product sales.
+        - label: I understand that this request does not activate a commercial license and that D25 requires physical validation before product sales.
           required: true

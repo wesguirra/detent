@@ -16,3 +16,6 @@
 .feature-player-slot video{object-fit:contain;background:#d8d7d1}.feature-play[aria-pressed="true"]{background:#e2dfd6;border-color:#a34520}.feature-caption{padding:7px;background:#e6e5e1c9;border-radius:2px}
 @media(max-width:650px){.hero-render>img{aspect-ratio:2200/1280}.hero-render figcaption{padding:15px 20px 9px;font-size:7px}.system-heading{grid-template-columns:1fr;gap:25px}.system-details{grid-template-columns:1fr;gap:25px}.system-details p{max-width:none}.system-overview figure{margin-top:28px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Personal digital-project purchase. */
+.personal-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;margin:2px 0 18px}.personal-price strong{font-size:54px;font-weight:500;letter-spacing:-2px;line-height:1.15}.personal-price span{font-size:11px;color:#62665f}.download.featured .digital-note{font-size:11px;opacity:.8;margin-top:18px}.download.featured .purchase-status{font-size:10px;line-height:1.6;margin-top:12px;opacity:.7}.checkout-pending{background:#535850}.download.featured .button{width:100%}

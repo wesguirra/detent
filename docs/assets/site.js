@@ -4,7 +4,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const pt={
   "skip": "Ir para o conteúdo",
   "navExplore": "Explorar",
-  "navFiles": "Obter DETENT",
+  "navFiles": "Obter DETENT · US$19",
   "navLicense": "Licenças",
   "actualCad": "D25 / PRÉVIA DE ACABAMENTO",
   "loading": "Preparando seu DETENT…",
@@ -31,7 +31,7 @@ const pt={
   "filesTitle": "Um projeto.<br>Tudo para montar.",
   "prototype": "D25 · PROTÓTIPO EM DESENVOLVIMENTO",
   "fullScale": "O projeto completo.",
-  "fullText": "Pacote pago para uso pessoal: arquivos de impressão, CAD editável e documentação de montagem. O preço para uso pessoal será anunciado no lançamento.",
+  "fullText": "O projeto digital D25: STLs identificados, 3MFs do Orca separados por cor, arquivos FreeCAD e STEP e documentação de montagem. Imprima e modifique para seu uso pessoal.",
   "halfScale": "Para quem vende impressões.",
   "halfText": "Vender peças físicas DETENT exige uma licença comercial separada. Acesso aos arquivos não autoriza vender impressões.",
   "sourceTitle": "Um sistema completo.",
@@ -109,9 +109,15 @@ const pt={
   "keeperMetric": "4 aberturas do retentor",
   "keeperPlay": "Reproduzir ajuste do retentor",
   "assemblyLabel": "01 / MONTAGEM",
-  "heroWidthRange": "80 mm / lado ↗"
+  "heroWidthRange": "80 mm / lado ↗",
+  "oneTime": "Pagamento único",
+  "digitalOnly": "Licença de uso pessoal · Somente arquivos digitais. Produto físico não incluído.",
+  "checkoutPending": "Checkout em breve",
+  "purchaseStatus": "Preço de US$19 para uso pessoal definido. O checkout online ainda não está aberto.",
+  "buyPersonal": "Comprar por US$19 ↗",
+  "purchaseReady": "Pagamento e entrega dos arquivos pelo checkout seguro. Licença de uso pessoal."
 };
-const en={};$$('[data-i18n]').forEach(e=>en[e.dataset.i18n]=e.innerHTML);let lang='en';const presets={signature:{gray:'#8b9095',black:'#202225',orange:'#f57824'},chalk:{gray:'#d9d6cc',black:'#484b48',orange:'#c7623f'},graphite:{gray:'#484d50',black:'#202225',orange:'#b7bdbb'}};let colors={...presets.signature},basePixels,maskPixels;try{lang=localStorage.getItem('detent-language')==='pt'?'pt':'en';const p=JSON.parse(localStorage.getItem('detent-palette'));if(p&&Object.keys(colors).every(k=>/^#[0-9a-f]{6}$/i.test(p[k])))colors=p;}catch{}
+const en={buyPersonal:'Buy for US$19 ↗',purchaseReady:'Secure checkout and file delivery. Personal-use licence.'};$$('[data-i18n]').forEach(e=>en[e.dataset.i18n]=e.innerHTML);let lang='en';const presets={signature:{gray:'#8b9095',black:'#202225',orange:'#f57824'},chalk:{gray:'#d9d6cc',black:'#484b48',orange:'#c7623f'},graphite:{gray:'#484d50',black:'#202225',orange:'#b7bdbb'}};let colors={...presets.signature},basePixels,maskPixels;try{lang=localStorage.getItem('detent-language')==='pt'?'pt':'en';const p=JSON.parse(localStorage.getItem('detent-palette'));if(p&&Object.keys(colors).every(k=>/^#[0-9a-f]{6}$/i.test(p[k])))colors=p;}catch{}
 function persist(k,v){try{localStorage.setItem(k,v)}catch{}}
 function setLanguage(l){lang=l;document.documentElement.lang=l==='pt'?'pt-BR':'en';$('#language').value=l;$$('[data-i18n]').forEach(e=>e.innerHTML=(l==='pt'?pt:en)[e.dataset.i18n]??en[e.dataset.i18n]);persist('detent-language',l)}$('#language').onchange=e=>setLanguage(e.target.value);setLanguage(lang);
 // Recolor in HSL so AgX highlights keep the selected hue.
@@ -136,3 +142,19 @@ function drawColors(){
 async function readPixels(url){const img=new Image();img.src=url;await img.decode();const c=document.createElement('canvas');c.width=1100;c.height=825;const x=c.getContext('2d');x.drawImage(img,0,0,c.width,c.height);return x.getImageData(0,0,c.width,c.height)}
 Promise.all([readPixels('assets/renders/color-base.png?v=d25'),readPixels('assets/renders/color-mask.png?v=d25')]).then(([a,b])=>{basePixels=a;maskPixels=b;$('#loading').hidden=true;drawColors()}).catch(()=>{$('#loading').textContent='Preview unavailable.'});Object.keys(colors).forEach(k=>$('#color-'+k).oninput=e=>{colors[k]=e.target.value;drawColors()});$$('[data-preset]').forEach(b=>b.onclick=()=>{colors={...presets[b.dataset.preset]};drawColors()});drawColors();
 let activeVideo;$$('[data-play-feature]').forEach(btn=>btn.onclick=()=>{const mode=btn.dataset.playFeature,section=$('[data-feature="'+mode+'"]');let video=section.querySelector('video');if(!video){video=document.createElement('video');video.src='assets/motion/'+mode+'.mp4?v=d25';video.muted=true;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-label',mode+' adjustment preview');section.querySelector('.feature-player-slot').append(video);video.onloadedmetadata=()=>section.querySelector('.feature-seek').disabled=false;video.ontimeupdate=()=>{const v=video.duration?video.currentTime/video.duration:0;section.querySelector('.feature-seek').value=v*100;section.querySelector('.feature-progress').textContent=Math.round(v*100)+'%';section.querySelectorAll('[data-feature-phase]').forEach((x,i)=>x.classList.toggle('current',i===(v<.25?0:v<.8?1:2)))};video.onended=()=>btn.setAttribute('aria-pressed','false');section.querySelector('.feature-seek').oninput=e=>{video.pause();video.currentTime=video.duration*Number(e.target.value)/100;btn.setAttribute('aria-pressed','false')}}if(activeVideo&&activeVideo!==video){activeVideo.pause();activeVideo.closest('[data-feature]').querySelector('[data-play-feature]').setAttribute('aria-pressed','false')}activeVideo=video;section.querySelector('.feature-visual').classList.add('active');if(video.paused){if(video.ended)video.currentTime=0;video.play().catch(()=>{btn.setAttribute('aria-pressed','false');section.querySelector('.feature-loading').hidden=false;section.querySelector('.feature-loading').textContent=lang==='pt'?'Não foi possível reproduzir. Tente novamente.':'Playback unavailable. Please try again.'});btn.setAttribute('aria-pressed','true')}else{video.pause();btn.setAttribute('aria-pressed','false')}});
+
+// Activate only a real hosted checkout. The paid file never travels through Pages.
+(function configureCheckout(){
+ const btn=document.querySelector('#personal-buy'),note=document.querySelector('#purchase-status');
+ if(!btn||!note)return;
+ const config=window.DETENT_STORE;
+ if(!config||config.currency!=='USD'||config.personalPrice!==19||!config.personalCheckoutUrl)return;
+ try{
+  const url=new URL(config.personalCheckoutUrl);
+  const providers={payhip:['payhip.com'],gumroad:['gumroad.com'],lemonsqueezy:['lemonsqueezy.com']};
+  const allowed=providers[config.provider]||[];
+  if(url.protocol!=='https:'||url.username||url.password||!allowed.some(h=>url.hostname===h||url.hostname.endsWith('.'+h)))return;
+  if((config.provider==='payhip'&&!((url.pathname==='/buy'&&url.searchParams.get('link'))||/^\/b\/[^/]+/.test(url.pathname)))||(config.provider==='gumroad'&&!/^\/l\/[^/]+/.test(url.pathname))||(config.provider==='lemonsqueezy'&&!/^\/checkout\/buy\/[^/]+/.test(url.pathname)))return;
+  btn.href=url.href;btn.rel='noopener';btn.classList.remove('checkout-pending');btn.dataset.i18n='buyPersonal';note.dataset.i18n='purchaseReady';setLanguage(lang);
+ }catch{}
+})();
