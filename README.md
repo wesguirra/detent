@@ -6,7 +6,7 @@ Public marketing website for DETENT, a modular under-desk laptop support.
 
 This repository contains website code, rendered images, videos and raster color previews only. CAD, STL, print projects and assembly manuals are not hosted here. Project access is paid; commercial physical-printing rights require a separate licence.
 
-The D25 product is a development prototype without a validated load rating. Personal-use access is US$19 as a one-time purchase. Hosted checkout is prepared but remains inactive until a live product URL is configured. No checkout is connected yet.
+The D25 product is a development prototype without a validated load rating. Personal-use access is US$19 as a one-time purchase. The live Payhip product page is https://payhip.com/b/pT3IL, with Stripe connected and a US$19 USD checkout.
 
 GitHub Pages serves `main:/docs`. Preview locally with `python3 -m http.server 8080 --directory docs`. The site has no build step, analytics or payment processing. Color and language preferences are stored in the browser.
 
@@ -16,4 +16,4 @@ Current presentation: D25 mechanical revision, without integrated USB hardware. 
 
 D25 adds four universal upper-edge keepers, with pinned opening setup at 18 / 24 / 30 / 36 mm. This revision is geometrically checked but has no physical impact qualification. Private printing includes STL and color-separated Orca 3MF projects; neither is hosted in this repository.
 
-Commerce: `docs/assets/store-config.js` holds only public checkout configuration. Set a verified live Payhip checkout URL to activate the US$19 button. Gumroad and Lemon Squeezy hosted URLs are also supported if the chosen provider changes. The pending state never links to a fake product or a public ZIP. Paid customer archives belong in the selling platform only.
+Commerce: `docs/assets/store-config.js` holds only public checkout configuration. The US$19 button links to the verified Payhip product page. Gumroad and Lemon Squeezy hosted URLs are also supported if the chosen provider changes. The static fallback also links to the verified product; project archives are never public. Paid customer archives belong in the selling platform only.
